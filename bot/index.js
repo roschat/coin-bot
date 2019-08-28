@@ -5,6 +5,7 @@ const bot = new RoschatBot({ config })
 
 bot.start()
   .then(res => {
+    console.log(`Бот ${config.name} успешно инициализирован!`)
     bot.on(BOT_MESSAGE_EVENT, onBotMessageEvent)
   })
   .catch(error => {
@@ -38,7 +39,7 @@ function onBotMessageEvent ({ data, dataType, cid, id }) {
 function getCoinState () {
   const value = Math.random()
   return {
-    value,
-    text: value <= 0.5 ? 'орел' : 'решка'
+    value: Math.floor(value * 100),
+    text: (value < 0.5005 && value > 0.4995) ? 'Монетка упала на ребро!' : (value <= 0.5 ? 'Орел' : 'Решка')
   }
 }
