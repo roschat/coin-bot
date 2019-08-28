@@ -24,11 +24,12 @@ function onBotMessageEvent ({ data, dataType, cid, id }) {
         bot.sendMessage({ cid }, 'Отправьте команду /coin, чтобы получить результат подбрасывания монетки')
         break
       case '/coin':
-        bot.sendMessage({ cid }, getCoinState().text)
+        const { text } = getCoinState()
+        bot.sendMessage({ cid }, text)
         break
-      case '/coin+value':
-        const { text, value } = getCoinState()
-        bot.sendMessage({ cid }, `${text}\nВыпавшее число: ${value}`)
+      case '/random':
+        const { value } = getCoinState()
+        bot.sendMessage({ cid }, value.toString())
         break
       default:
         bot.sendMessage({ cid }, 'Неизвестная команда!')
