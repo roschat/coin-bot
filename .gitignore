@@ -2,3 +2,4 @@ node_modules
 .vscode
 *.tar
 deploy.sh
+bot/config.json

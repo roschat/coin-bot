@@ -1,5 +1,11 @@
 const { RoschatBot, BOT_MESSAGE_EVENT } = require('../index')
-const config = require('./config.json')
+const config = process.env.NODE_ENV === 'production'
+  ? {
+    baseUrl: process.env.BASE_URL,
+    name: process.env.NAME,
+    token: process.env.TOKEN
+  }
+  : require('./config.json')
 
 const bot = new RoschatBot({ config })
 

@@ -1,0 +1,5 @@
+{
+	"baseUrl": "https://example.ros.chat",
+	"token": "BOT_TOKEN",
+	"name": "BOT_NAME"
+}
