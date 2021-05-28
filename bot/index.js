@@ -1,4 +1,5 @@
-const { RoschatBot, BOT_MESSAGE_EVENT } = require('../index')
+const { RoschatBot, BOT_MESSAGE_EVENT } = require('roschat-bot-js-sdk')
+
 const config = process.env.NODE_ENV === 'production'
   ? {
     baseUrl: process.env.BASE_URL,
@@ -7,7 +8,11 @@ const config = process.env.NODE_ENV === 'production'
   }
   : require('./config.json')
 
-const bot = new RoschatBot({ config })
+if (process.env.NODE_ENV !== 'production') {
+  process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0'
+}
+
+const bot = new RoschatBot(config)
 
 bot.start()
   .then(res => {
@@ -27,7 +32,9 @@ function onBotMessageEvent ({ data, dataType, cid, id }) {
   if (dataType === 'text') {
     switch (data) {
       case '/start':
-        bot.sendMessage({ cid }, 'Отправьте команду /coin, чтобы получить результат подбрасывания монетки')
+        bot.sendMessage({ cid }, `Доступные команды:
+/coin - возвращает результат подбрасывания монетки (орел или решка)
+/random - возвращает случайное число от 1 до 100`)
         break
       case '/coin':
         const { text } = getCoinState()
