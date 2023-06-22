@@ -1,6 +1,5 @@
 {
   "name": "roschat-bot",
-  "type": "module",
   "version": "1.0.0",
   "description": "JavaScript SDK для написания ботов для сервера РОСЧАТ.",
   "main": "index",
